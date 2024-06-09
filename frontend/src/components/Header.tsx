@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         style={{ width: 100, height: 100, marginRight: 16 }}
       />
       <Typography
-        variant="h4"
+        variant="h3"
         sx={{ color: theme.palette.text.primary, margin: "20px 0" }}
       >
         Book Assignment

@@ -41,7 +41,7 @@ const ReadingList: React.FC = () => {
     >
       <Box width="100%">
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             color: theme.palette.custom?.yellowDark,
             padding: "8px",
