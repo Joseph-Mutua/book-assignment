@@ -11,9 +11,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { styled } from "@mui/system";
 import { motion } from "framer-motion";
 import useReadingListStore from "../store/useReadingListStore";
+import { StyledBox } from "./styled/StyledBox";
+import { StyledListItem } from "./styled/StyledListIem";
 
 interface SearchResultsDropdownProps {
   results: { title: string; author: string; coverPhotoURL: string }[];
@@ -24,38 +25,8 @@ interface SearchResultsDropdownProps {
   }) => void;
 }
 
-const StyledBox = styled(Box)(({ theme }) => ({
-  position: "absolute",
-  top: "calc(100% + 8px)", // Ensure dropdown appears just below the search bar with a small gap
-  width: "100%",
-  maxHeight: "500px",
-  overflowY: "auto",
-  backgroundColor: "#fff",
-  border: `1px solid ${theme.palette.primary.main}`,
-  borderRadius: "8px",
-  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-  zIndex: 1000,
-  "&::-webkit-scrollbar": {
-    width: "8px",
-  },
-  "&::-webkit-scrollbar-thumb": {
-    backgroundColor: theme.palette.primary.main,
-    borderRadius: "8px",
-  },
-  "&::-webkit-scrollbar-track": {
-    backgroundColor: theme.palette.custom?.turquoiseLight,
-  },
-}));
 
-const StyledListItem = styled(ListItem)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  [theme.breakpoints.down("sm")]: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-  },
-}));
+
 
 const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
   results,
@@ -97,6 +68,8 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
                           .href
                       }
                       alt={`${book.title} cover`}
+                      variant="square"
+                      sx={{ borderRadius: 2 }} // Add this line for rounded borders
                     />
                   </ListItemAvatar>
                   <ListItemText

@@ -1,25 +1,8 @@
-import create, { StateCreator } from "zustand";
-import { persist, PersistOptions } from "zustand/middleware";
+import create from "zustand";
+import { persist } from "zustand/middleware";
+import { AppState, Book, MyPersist } from "../types";
 
-interface Book {
-  title: string;
-  author: string;
-  coverPhotoURL: string;
-}
-
-interface ReadingListState {
-  readingList: Book[];
-  addBook: (book: Book) => void;
-  removeBook: (book: Book) => void;
-}
-
-type MyState = ReadingListState;
-type MyPersist = (
-  config: StateCreator<MyState>,
-  options: PersistOptions<MyState>
-) => StateCreator<MyState>;
-
-const useReadingListStore = create<MyState>(
+const useReadingListStore = create<AppState>(
   (persist as MyPersist)(
     (set) => ({
       readingList: [],
@@ -35,7 +18,7 @@ const useReadingListStore = create<MyState>(
         })),
     }),
     {
-      name: "reading-list-storage", // name of the item in storage
+      name: "reading-list-storage",
     }
   )
 );
