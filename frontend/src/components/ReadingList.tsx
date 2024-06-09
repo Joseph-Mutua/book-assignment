@@ -53,13 +53,14 @@ const ReadingList: React.FC = () => {
           Reading List
         </Typography>
       </Box>
-      {readingList.length === 0 ? (
+      {readingList.length === 0 && (
         <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
           <Typography variant="body1">
             No Books in the Reading List. Search to Add
           </Typography>
         </Box>
-      ) : (
+      )}
+      {readingList.length > 0 && (
         <Grid
           container
           spacing={2}

@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import {
-  CssBaseline,
-  Container,
-  Box,
-  Skeleton,
-  Alert,
-} from "@mui/material";
+import { CssBaseline, Container, Box, Alert } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { ApolloProvider } from "@apollo/client";
 import SearchBar from "./components/SearchBar";
 import ReadingList from "./components/ReadingList";
 import Header from "./components/Header";
+import LoadingSkeletons from "./components/LoadingSkeletons";
 import theme from "./styles/theme";
 import { useBooks } from "./hooks/useBooks";
 import client from "./utils/apolloClient";
@@ -37,21 +32,11 @@ const App: React.FC = () => {
           <Header />
           <Box sx={{ marginTop: 4, textAlign: "center" }}>
             <SearchBar onSearch={handleSearch} results={filteredBooks} />
-            {loading ? (
-              <>
-                <Skeleton variant="rectangular" width="100%" height={60} />
-                <Skeleton
-                  variant="rectangular"
-                  width="100%"
-                  height={60}
-                  sx={{ mt: 2 }}
-                />
-              </>
-            ) : error ? (
+            {loading && <LoadingSkeletons />}
+            {!loading && error && (
               <Alert severity="error">{error.message}</Alert>
-            ) : (
-              <ReadingList />
             )}
+            {!loading && !error && <ReadingList />}
           </Box>
         </Container>
       </ThemeProvider>
