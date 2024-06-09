@@ -9,6 +9,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Book } from "../types";
+import { useTheme } from "@mui/material/styles";
 
 interface BookCardProps {
   book: Book;
@@ -19,6 +20,7 @@ interface BookCardProps {
 const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
   const coverPhoto = new URL(`../../${book.coverPhotoURL}`, import.meta.url)
     .href;
+  const theme = useTheme();
 
   return (
     <Card
@@ -48,8 +50,10 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
       <Button
         variant="contained"
         sx={{
-          backgroundColor: onRemove ? "#f76434" : "#5acccc",
-          color: "white",
+          backgroundColor: onRemove
+            ? theme.palette.secondary.main
+            : theme.palette.primary.main,
+          color: theme.palette.common.white,
           borderRadius: "8px",
           margin: 1,
         }}
