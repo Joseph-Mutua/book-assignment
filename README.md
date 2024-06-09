@@ -174,8 +174,13 @@ frontend/
 │   ├── ReadingList.png
 ├── src/
 │   ├── components/
-│   │   ├── App.tsx
+│   │   ├── styled/
+│   │   │   ├── StyledBox.tsx
+│   │   │   ├── StyledListItem.tsx
+│   │   │   ├── StyledTextField.tsx
 │   │   ├── BookCard.tsx
+│   │   ├── BookListItem.tsx
+│   │   ├── Header.tsx
 │   │   ├── ReadingList.tsx
 │   │   ├── SearchBar.tsx
 │   │   ├── SearchResultsDropdown.tsx
@@ -187,8 +192,6 @@ frontend/
 │   │   ├── useReadingListStore.ts
 │   ├── styles/
 │   │   ├── theme.ts
-│   │   ├── StyledBox.ts
-│   │   ├── StyledListItem.ts
 │   ├── types/
 │   │   ├── index.ts
 │   ├── utils/
@@ -203,6 +206,7 @@ frontend/
 ├── vite.config.ts
 |
 README.md
+
 ```
 
 ## License
