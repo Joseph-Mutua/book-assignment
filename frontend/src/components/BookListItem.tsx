@@ -69,6 +69,9 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
             onClick={handleAddToReadingList}
             fullWidth={isSmallScreen}
             disabled={isBookInReadingList}
+            sx={{
+                color: "white",
+            }}
             aria-label={
               isBookInReadingList
                 ? `Already added ${book.title} to reading list`
