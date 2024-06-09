@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Typography, Grid, Box, Snackbar, Alert } from "@mui/material";
-import BookCard from "./BookCard";
 import { useTheme } from "@mui/material/styles";
-import useReadingListStore from "../store/useReadingListStore";
 import { AnimatePresence, motion } from "framer-motion";
+import useReadingListStore from "../store/useReadingListStore";
+import BookCard from "./BookCard";
+import { Book } from "../types";
 
 const ReadingList: React.FC = () => {
   const theme = useTheme();
@@ -11,11 +12,7 @@ const ReadingList: React.FC = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleRemoveFromReadingList = (book: {
-    title: string;
-    author: string;
-    coverPhotoURL: string;
-  }) => {
+  const handleRemoveFromReadingList = (book: Book) => {
     removeBook(book);
     setSnackbarMessage(`${book.title} removed from reading list`);
     setOpenSnackbar(true);

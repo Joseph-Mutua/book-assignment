@@ -11,17 +11,14 @@ import StyledTextField from "./styled/StyledTextField";
 import SearchResultsDropdown from "./SearchResultsDropdown";
 import useReadingListStore from "../store/useReadingListStore";
 import { AnimatePresence } from "framer-motion";
+import { Book } from "../types";
 
-interface Book {
-  title: string;
-  author: string;
-  coverPhotoURL: string;
-}
-
-const SearchBar: React.FC<{
+interface SearchBarProps {
   onSearch: (query: string) => void;
   results: Book[];
-}> = ({ onSearch, results }) => {
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");

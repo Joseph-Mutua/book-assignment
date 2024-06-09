@@ -15,14 +15,11 @@ import { motion } from "framer-motion";
 import useReadingListStore from "../store/useReadingListStore";
 import { StyledBox } from "./styled/StyledBox";
 import { StyledListItem } from "./styled/StyledListIem";
+import { Book } from "../types";
 
 interface SearchResultsDropdownProps {
-  results: { title: string; author: string; coverPhotoURL: string }[];
-  onAdd: (book: {
-    title: string;
-    author: string;
-    coverPhotoURL: string;
-  }) => void;
+  results: Book[];
+  onAdd: (book: Book) => void;
 }
 
 const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
@@ -33,11 +30,7 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const { readingList } = useReadingListStore();
 
-  const handleAddToReadingList = (book: {
-    title: string;
-    author: string;
-    coverPhotoURL: string;
-  }) => {
+  const handleAddToReadingList = (book: Book) => {
     onAdd(book);
   };
 
@@ -59,14 +52,15 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
               <React.Fragment key={index}>
                 <StyledListItem>
                   <ListItemAvatar>
+
                     <Avatar
                       src={
-                        new URL(`../${book.coverPhotoURL}`, import.meta.url)
+                        new URL(`../../${book.coverPhotoURL}`, import.meta.url)
                           .href
                       }
                       alt={`${book.title} cover`}
                       variant="square"
-                      sx={{ borderRadius: 2 }} // Add this line for rounded borders
+                      sx={{ borderRadius: 2 }}
                       aria-label={`Cover of ${book.title}`}
                     />
                   </ListItemAvatar>

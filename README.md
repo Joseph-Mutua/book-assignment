@@ -1,60 +1,98 @@
- ![svgviewer-output](https://github.com/ElloTechnology/backend_takehome/assets/3518127/561bc8d4-bffc-4360-b9ea-61e876bcec93)
+# Book Assignment App Documentation
 
+## Overview
 
-# Ello Engineering Challenge
+The Book Assignment App allows teachers to search for books by title, add them to a reading list, and manage the reading list effectively. This documentation will guide you through the usage, features, and the code structure of the app.
 
-👋 Hello,
-We are really excited about you potentially joining the team, so we designed this take home exercise to give you a taste of the challenges you may encounter in the role, and better understand what it would be like to work closely together.
+## Features
 
-Thanks for taking the time, and we hope to talk with you soon!
+- **Search for Books**: Teachers can search for books by title using a search bar.
+- **View Search Results**: The search results are displayed as a dropdown beneath the search bar.
+- **Add Books to Reading List**: Each book in the search results can be added to the reading list.
+- **View Reading List**: The reading list displays all books added by the teacher.
+- **Remove Books from Reading List**: Each book in the reading list can be removed.
+- **Responsive Design**: The app is fully responsive across all screen sizes.
+- **State Persistence**: The reading list is persisted across sessions using local storage.
+- **User Feedback**: Success messages are shown when books are added or removed from the reading list.
 
-## About Ello
+## Usage
 
-Ello is a forward-thinking educational technology company dedicated to revolutionizing the way children learn to read. Our mission is to empower young readers with the tools they need to become proficient and passionate readers. We believe that fostering a love for reading is essential for a child's academic and personal growth.
+### Installation
 
-**Note:** Please don't fork this repository or create a pull request against it. Other applicants may take inspiration from it. You should create another repository for the challenge. Once the coding challenge is completed, email your solution back to our team at [fullstack2024@ello.com](mailto:fullstack2024@ello.com).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/your-repo/book-assignment-app.git
+   cd book-assignment-app
+   ```
 
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-## Challenge
-As part of our goal to have Ello impact as many children as we can, we offer an Ello web viewer product. [https://books.ello.com](https://books.ello.com/)
+3. **Start the development server**:
+   ```bash
+   npm start
+   ```
 
+### Running the App
 
-We give this to certain schools for free to allow teachers to share our books with children. 
-You are building part of the teacher-facing UI for this product,
-namely the book assignment view, where teachers can assign books to students. 
+Once the development server is running, open your browser and navigate to `http://localhost:3000`. You will see the Book Assignment App.
 
-The view should have the following features:-
+## Components
 
-1. A search bar that allows users to search for books by title.
-2. A list of search results that displays the book title, author, and a button to add the book to the students reading list.
-3. A reading list that displays all the books that the teacher has added.
-4. A button to remove a book from the reading list.
+### App
 
-You can build this view without the concept of a "student" and just have a single reading list for the teacher.
+The `App` component is the root component that integrates all other components. It fetches the list of books and manages the search query and filtered books.
 
-### Requirements
-- Use React as the frontend framework.
-- Showcase the use of React hooks.
-- Use [material-ui](https://mui.com/material-ui/) as the component library.
-- Write your code in the `src/frontend` directory.
-- Create components as you feel is best suited for your solution
-<img width="1013" alt="Screenshot 2024-05-15 at 19 10 51" src="https://github.com/ElloTechnology/fullstack-take-home-test/assets/3518127/bc3eb7f7-489f-4304-93f4-032bbbd38c58">
+**File**: `src/App.tsx`
 
+### SearchBar
 
-### Data
-To get access to data that you will use for this challenge you can switch into the `src/backend` folder and run
+The `SearchBar` component provides an input field for searching books by title. It displays a dropdown with search results.
 
-```bash
-npm install
-```
+**Props**:
+- `onSearch`: Function to handle the search query.
+- `results`: Array of books that match the search query.
 
-Then run the following command to start the server
+**File**: `src/components/SearchBar.tsx`
 
-```bash
-npm start
-```
+### SearchResultsDropdown
 
-This start a Graphql server at the url `http://localhost:4000/`, the server has a single query `books` that returns a list of books. 
+The `SearchResultsDropdown` component displays the list of search results in a dropdown. Each book in the list has an option to be added to the reading list.
+
+**Props**:
+- `results`: Array of books that match the search query.
+- `onAdd`: Function to add a book to the reading list.
+
+**File**: `src/components/SearchResultsDropdown.tsx`
+
+### ReadingList
+
+The `ReadingList` component displays the books that have been added to the reading list. Each book can be removed from the list.
+
+**File**: `src/components/ReadingList.tsx`
+
+### BookCard
+
+The `BookCard` component displays the details of a book, including the title, author, and cover photo. It provides buttons to add or remove the book from the reading list.
+
+**Props**:
+- `book`: The book object containing title, author, and cover photo URL.
+- `onAdd`: Function to add the book to the reading list.
+- `onRemove`: Function to remove the book from the reading list.
+
+**File**: `src/components/BookCard.tsx`
+
+## State Management
+
+The app uses `zustand` for state management. The reading list is persisted across sessions using the `persist` middleware.
+
+**File**: `src/store/useReadingListStore.ts`
+
+## GraphQL
+
+The app uses Apollo Client to fetch data from a GraphQL server. The GraphQL query used is:
 
 ```graphql
 query Books {
@@ -67,19 +105,66 @@ query Books {
 }
 ```
 
-You can use this query to get the list of books to display in your frontend. You may need to adjust the `coverPhotoURL` to be a valid URL. The photos are in the `src/frontend/assets` directory.
+**File**: `src/graphql/queries.ts`
 
-### Styling Guidelines
-- Use the "Mulish" Google font
-- You can use the following colors (You don't have to use all but you can pick and choose from here)
-<img width="961" alt="Screenshot 2024-05-14 at 17 36 40" src="https://github.com/ElloTechnology/fullstack-take-home-test/assets/3518127/15922f8f-a7c7-4033-8405-76988e95afb3">
+## Styling
 
+The app uses Material-UI for styling and components. Custom styles are defined in the theme file.
 
+**File**: `src/styles/theme.ts`
 
+### Custom Styled Components
 
-### You will be evaluated on
-- Code quality and organization.
-- User experience and design.
-- Beautiful and responsive UI.
+- **StyledBox**: Custom styles for the dropdown box.
+- **StyledListItem**: Custom styles for the list items in the dropdown.
 
+**Files**:
+- `src/styles/StyledBox.ts`
+- `src/styles/StyledListItem.ts`
 
+## Accessibility
+
+The app ensures accessibility by providing appropriate `aria-labels` for interactive elements such as buttons and input fields.
+
+## User Feedback
+
+Snackbar alerts are used to provide feedback to the user when a book is added or removed from the reading list.
+
+## Example Workflow
+
+1. **Search for a Book**:
+   - Type the title of a book in the search bar.
+   - The dropdown will display the search results.
+
+2. **Add a Book to the Reading List**:
+   - Click the "Add to Reading List" button next to a book in the search results.
+   - A success message will appear, and the book will be added to the reading list.
+
+3. **View the Reading List**:
+   - Scroll down to view the reading list.
+   - The list displays all books that have been added.
+
+4. **Remove a Book from the Reading List**:
+   - Click the "Remove" button next to a book in the reading list.
+   - A success message will appear, and the book will be removed from the reading list.
+
+## Contributing
+
+If you want to contribute to the development of this app, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes and push them to your fork.
+4. Create a pull request with a detailed description of your changes.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Contact
+
+For any questions or feedback, please contact [your email].
+
+---
+
+This documentation covers all the essential aspects of the Book Assignment App, including installation, usage, component structure, state management, and styling. It aims to provide a comprehensive guide for users and developers alike.
