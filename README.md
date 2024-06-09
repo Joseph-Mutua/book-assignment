@@ -36,6 +36,7 @@ To view the deployed live version visit this [Link](https://ello-frontend-challe
    ```
 
 3. **Start the development server**:
+   
    ***Frontend***
    ```bash
    npm run dev
