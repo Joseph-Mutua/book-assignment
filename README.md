@@ -164,7 +164,7 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 
 ## Project Structure
 
-Below is a wireframe of the project structure, showcasing the files and folders:
+Below is a wireframe of the frontend project structure, showcasing the files and folders:
 
 ```
 frontend/
@@ -201,9 +201,7 @@ frontend/
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-backend/
-├── package.json
-├── server.ts
+|
 README.md
 ```
 
