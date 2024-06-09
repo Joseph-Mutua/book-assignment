@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { CssBaseline, Container, Box, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { ApolloProvider,} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import SearchBar from "./components/SearchBar";
-import SearchResults from "./components/SearchResults";
 import ReadingList from "./components/ReadingList";
 import theme from "./styles/theme";
-import { useBooks } from './hooks/useBook';
+import { useBooks } from "./hooks/useBooks";
 import client from "./apollo-client";
-
 
 interface Book {
   title: string;
@@ -35,40 +33,34 @@ const App: React.FC = () => {
     );
   };
 
-  const filteredBooks = data?.books.filter((book: Book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBooks =
+    data?.books.filter((book: Book) =>
+      book.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
 
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container>
-          <Box sx={{ marginTop: 4 }}>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginBottom: 4,
-              }}
+          <Box sx={{ marginTop: 4, textAlign: "center" }}>
+            <Typography
+              variant="h4"
+              sx={{ color: "#335c6e", margin: "20px 0" }}
             >
-              <Typography variant="h4" sx={{ color: "#335c6e" }}>
-                Book Assignment
-              </Typography>
-            </Box>
-            <SearchBar onSearch={handleSearch} />
+              Book Assignment
+            </Typography>
+            <SearchBar
+              onSearch={handleSearch}
+              results={filteredBooks}
+              onAdd={handleAddToReadingList}
+            />
             <ReadingList
               books={readingList}
               onRemove={handleRemoveFromReadingList}
             />
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
-            {filteredBooks && (
-              <SearchResults
-                results={filteredBooks}
-                onAdd={handleAddToReadingList}
-              />
-            )}
           </Box>
         </Container>
       </ThemeProvider>

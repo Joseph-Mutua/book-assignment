@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Grid } from "@mui/material";
+import {  Typography, Grid, Box } from "@mui/material";
 import BookCard from "./BookCard";
 import { useTheme } from "@mui/material/styles";
 
@@ -22,23 +22,30 @@ const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
         sx={{
           backgroundColor: theme.palette.custom?.yellowDark,
           padding: "8px",
-          marginTop: "20px",
           marginBottom: "16px",
         }}
       >
         Reading List
       </Typography>
-      <Grid container spacing={2}>
-        {books.map((book, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <BookCard
-              book={book}
-              onAdd={() => {}}
-              onRemove={() => onRemove(book)}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {books.length === 0 ? (
+        <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
+          <Typography variant="body1">
+            No Books in the Reading List. Search to Add
+          </Typography>
+        </Box>
+      ) : (
+        <Grid container spacing={2}>
+          {books.map((book, index) => (
+            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+              <BookCard
+                book={book}
+                onAdd={() => {}} // No add functionality in reading list
+                onRemove={() => onRemove(book)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </div>
   );
 };
