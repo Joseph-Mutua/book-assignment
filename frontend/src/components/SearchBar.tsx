@@ -1,27 +1,34 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
+import { InputAdornment, Box } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import StyledTextField from "./styled/StyledTextField"; // Adjust the import path as necessary
 
-interface SearchBarProps {
-  onSearch: (searchTerm: string) => void;
-}
+const SearchBar: React.FC<{ onSearch: (query: string) => void }> = ({
+  onSearch,
+}) => {
+  const [query, setQuery] = useState("");
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value);
     onSearch(event.target.value);
   };
 
   return (
-    <TextField
-      fullWidth
-      variant="outlined"
-      placeholder="Search for books by title..."
-      onChange={handleSearch}
-      sx={{
-        backgroundColor: "#cffafa",
-        borderRadius: "8px",
-        margin: "20px 0",
-      }}
-    />
+    <Box sx={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
+      <StyledTextField
+        placeholder="Search for books by title..."
+        value={query}
+        onChange={handleInputChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
+        sx={{ width: "50%" }} // Adjust the width as needed
+      />
+    </Box>
   );
 };
 

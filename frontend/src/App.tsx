@@ -1,69 +1,79 @@
 import React, { useState } from "react";
-import { ApolloProvider, useQuery } from "@apollo/client";
-import {
-  Container,
-  CssBaseline,
-  ThemeProvider,
-  Typography,
-} from "@mui/material";
-import { GET_BOOKS } from "./graphql/queries";
+import { CssBaseline, Container, Box, Typography } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { ApolloProvider,} from "@apollo/client";
 import SearchBar from "./components/SearchBar";
-import BookList from "./components/BookList";
+import SearchResults from "./components/SearchResults";
 import ReadingList from "./components/ReadingList";
 import theme from "./styles/theme";
+import { useBooks } from './hooks/useBook';
 import client from "./apollo-client";
-import "./App.css";
 
 
 interface Book {
   title: string;
   author: string;
   coverPhotoURL: string;
-  readingLevel: string;
 }
-function App() {
-  const [searchTerm, setSearchTerm] = useState("");
+
+const App: React.FC = () => {
+  const { loading, error, data } = useBooks();
+  const [searchQuery, setSearchQuery] = useState("");
   const [readingList, setReadingList] = useState<Book[]>([]);
-  const { data, loading, error } = useQuery(GET_BOOKS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
 
-  const books: Book[] = data?.books.filter((book: Book) =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleAddToReadingList = (book: Book) => {
+    setReadingList((prevList) => [...prevList, book]);
+  };
+
+  const handleRemoveFromReadingList = (book: Book) => {
+    setReadingList((prevList) =>
+      prevList.filter((b) => b.title !== book.title)
+    );
+  };
+
+  const filteredBooks = data?.books.filter((book: Book) =>
+    book.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const handleAddBook = (book: Book) => {
-    setReadingList([...readingList, book]);
-  };
-
-  const handleRemoveBook = (title: string) => {
-    setReadingList(readingList.filter((book) => book.title !== title));
-  };
 
   return (
-    <>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Container>
-            <Typography
-              variant="h4"
-              sx={{ color: "#335c6e", margin: "20px 0" }}
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container>
+          <Box sx={{ marginTop: 4 }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: 4,
+              }}
             >
-              Book Assignment
-            </Typography>
-            <SearchBar onSearch={setSearchTerm} />
-            <BookList books={books} onAdd={handleAddBook} />
+              <Typography variant="h4" sx={{ color: "#335c6e" }}>
+                Book Assignment
+              </Typography>
+            </Box>
+            <SearchBar onSearch={handleSearch} />
             <ReadingList
-              readingList={readingList}
-              onRemove={handleRemoveBook}
+              books={readingList}
+              onRemove={handleRemoveFromReadingList}
             />
-          </Container>
-        </ThemeProvider>
-      </ApolloProvider>
-    </>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error.message}</p>}
+            {filteredBooks && (
+              <SearchResults
+                results={filteredBooks}
+                onAdd={handleAddToReadingList}
+              />
+            )}
+          </Box>
+        </Container>
+      </ThemeProvider>
+    </ApolloProvider>
   );
-}
+};
 
 export default App;

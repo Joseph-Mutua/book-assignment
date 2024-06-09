@@ -1,64 +1,44 @@
 import React from "react";
-import {
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-
-interface Book {
-  title: string;
-  author: string;
-  coverPhotoURL: string;
-  readingLevel: string;
-}
+import { Typography, Grid } from "@mui/material";
+import BookCard from "./BookCard";
+import { useTheme } from "@mui/material/styles";
 
 interface ReadingListProps {
-  readingList: Book[];
-  onRemove: (title: string) => void;
+  books: { title: string; author: string; coverPhotoURL: string }[];
+  onRemove: (book: {
+    title: string;
+    author: string;
+    coverPhotoURL: string;
+  }) => void;
 }
 
-const ReadingList: React.FC<ReadingListProps> = ({ readingList, onRemove }) => {
+const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
+  const theme = useTheme();
+
   return (
     <div>
       <Typography
         variant="h6"
         sx={{
-          fontWeight: "bold",
-          color: "#335c6e",
-          backgroundColor: "#fabd33",
-          padding: "10px",
+          backgroundColor: theme.palette.custom?.yellowDark,
+          padding: "8px",
+          marginTop: "20px",
+          marginBottom: "16px",
         }}
       >
         Reading List
       </Typography>
-      <List>
-        {readingList.map((book, index) => (
-          <ListItem
-            key={`${book.title}-${index}`}
-            sx={{ borderBottom: "1px solid #ccc" }}
-          >
-            <ListItemText
-              primary={book.title}
-              secondary={book.author}
-              primaryTypographyProps={{ fontWeight: "bold", color: "#335c6e" }}
-              secondaryTypographyProps={{
-                fontStyle: "italic",
-                color: "#28B8B8",
-              }}
+      <Grid container spacing={2}>
+        {books.map((book, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+            <BookCard
+              book={book}
+              onAdd={() => {}}
+              onRemove={() => onRemove(book)}
             />
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => onRemove(book.title)}
-              sx={{ borderRadius: "8px" }}
-            >
-              Remove
-            </Button>
-          </ListItem>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </div>
   );
 };
