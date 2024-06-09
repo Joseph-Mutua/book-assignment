@@ -24,12 +24,22 @@ const App: React.FC = () => {
   };
 
   const handleAddToReadingList = (book: Book) => {
-    setReadingList((prevList) => [...prevList, book]);
+    setReadingList((prevList) => {
+      // Ensure unique items in the reading list
+      if (
+        !prevList.find(
+          (b) => b.title === book.title && b.author === book.author
+        )
+      ) {
+        return [...prevList, book];
+      }
+      return prevList;
+    });
   };
 
   const handleRemoveFromReadingList = (book: Book) => {
     setReadingList((prevList) =>
-      prevList.filter((b) => b.title !== book.title)
+      prevList.filter((b) => b.title !== book.title || b.author !== book.author)
     );
   };
 
@@ -54,6 +64,7 @@ const App: React.FC = () => {
               onSearch={handleSearch}
               results={filteredBooks}
               onAdd={handleAddToReadingList}
+              readingList={readingList}
             />
             <ReadingList
               books={readingList}

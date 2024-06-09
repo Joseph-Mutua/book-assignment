@@ -28,7 +28,7 @@ const StyledBox = styled(Box)(({ theme }) => ({
   maxHeight: "500px",
   overflowY: "auto",
   backgroundColor: "#fff",
-  border: "1px solid #335c6e",
+  border: `1px solid ${theme.palette.primary.main}`, // Use primary color from theme
   borderRadius: "8px",
   boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
   zIndex: 1000,
