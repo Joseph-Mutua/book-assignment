@@ -36,7 +36,7 @@ To view the deployed live version visit this [Link](https://ello-frontend-challe
    ```
 
 3. **Start the development server**:
- ***Frontend***
+   ***Frontend***
    ```bash
    npm run dev
    ```
@@ -45,7 +45,6 @@ To view the deployed live version visit this [Link](https://ello-frontend-challe
    ```bash
    npm start
    ```
-
 
 ### Running the App
 
@@ -163,6 +162,50 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
    - Click the "Remove" button next to a book in the reading list.
    - A success message will appear, and the book will be removed from the reading list.
 
+## Project Structure
+
+Below is a wireframe of the project structure, showcasing the files and folders:
+
+```
+frontend/
+├── public/
+│   ├── AppIcon.svg
+│   ├── BookSearch.png
+│   ├── ReadingList.png
+├── src/
+│   ├── components/
+│   │   ├── App.tsx
+│   │   ├── BookCard.tsx
+│   │   ├── ReadingList.tsx
+│   │   ├── SearchBar.tsx
+│   │   ├── SearchResultsDropdown.tsx
+│   ├── graphql/
+│   │   ├── queries.ts
+│   ├── hooks/
+│   │   ├── useBooks.ts
+│   ├── store/
+│   │   ├── useReadingListStore.ts
+│   ├── styles/
+│   │   ├── theme.ts
+│   │   ├── StyledBox.ts
+│   │   ├── StyledListItem.ts
+│   ├── types/
+│   │   ├── index.ts
+│   ├── utils/
+│   │   ├── apolloClient.ts
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── vite-env.d.ts
+│   └── index.tsx
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+backend/
+├── package.json
+├── server.ts
+README.md
+```
 
 ## License
 
