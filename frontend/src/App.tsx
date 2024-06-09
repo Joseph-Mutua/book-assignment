@@ -3,7 +3,6 @@ import {
   CssBaseline,
   Container,
   Box,
-  Typography,
   Skeleton,
   Alert,
 } from "@mui/material";
@@ -11,6 +10,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { ApolloProvider } from "@apollo/client";
 import SearchBar from "./components/SearchBar";
 import ReadingList from "./components/ReadingList";
+import Header from "./components/Header";
 import theme from "./styles/theme";
 import { useBooks } from "./hooks/useBooks";
 import client from "./utils/apolloClient";
@@ -19,8 +19,6 @@ import { Book } from "./types";
 const App: React.FC = () => {
   const { loading, error, data } = useBooks();
   const [searchQuery, setSearchQuery] = useState("");
-
-
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -36,13 +34,8 @@ const App: React.FC = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container>
+          <Header />
           <Box sx={{ marginTop: 4, textAlign: "center" }}>
-            <Typography
-              variant="h4"
-              sx={{ color: theme.palette.text.primary, margin: "20px 0" }}
-            >
-              Book Assignment
-            </Typography>
             <SearchBar onSearch={handleSearch} results={filteredBooks} />
             {loading ? (
               <>

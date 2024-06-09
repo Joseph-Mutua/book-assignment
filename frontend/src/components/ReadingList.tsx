@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Typography, Grid, Box, Snackbar, Alert } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Box,
+  Snackbar,
+  Alert,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { AnimatePresence, motion } from "framer-motion";
 import useReadingListStore from "../store/useReadingListStore";
@@ -8,6 +15,7 @@ import { Book } from "../types";
 
 const ReadingList: React.FC = () => {
   const theme = useTheme();
+  const isXsScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const { readingList, removeBook } = useReadingListStore();
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -23,28 +31,54 @@ const ReadingList: React.FC = () => {
   };
 
   return (
-    <div aria-label="Reading List">
-      <Typography
-        variant="h6"
-        sx={{
-          backgroundColor: theme.palette.custom?.yellowDark,
-          padding: "8px",
-          marginBottom: "16px",
-        }}
-      >
-        Reading List
-      </Typography>
+    <Box
+      aria-label="Reading List"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      padding={2}
+      width="100%"
+    >
+      <Box width="100%">
+        <Typography
+          variant="h3"
+          sx={{
+            color: theme.palette.custom?.yellowDark,
+            padding: "8px",
+            marginBottom: "16px",
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          Reading List
+        </Typography>
+      </Box>
       {readingList.length === 0 ? (
         <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
           <Typography variant="body1">
-            No books in the reading list. Search to Add
+            No Books in the Reading List. Search to Add
           </Typography>
         </Box>
       ) : (
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent={isXsScreen ? "center" : "flex-start"}
+          sx={{
+            display: "flex",
+          }}
+        >
           <AnimatePresence>
             {readingList.map((book, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+              <Grid
+                item
+                key={index}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -75,7 +109,7 @@ const ReadingList: React.FC = () => {
           {snackbarMessage}
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   );
 };
 
