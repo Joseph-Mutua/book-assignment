@@ -22,9 +22,10 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
       transition={{ duration: 0.3 }}
     >
       <StyledBox>
-        {results.length === 0 ? (
+        {results.length === 0 && (
           <ListItemText primary="No titles match your search" />
-        ) : (
+        )}
+        {results.length > 0 && (
           <List>
             {results.map((book, index) => (
               <BookListItem key={index} book={book} onAdd={onAdd} />

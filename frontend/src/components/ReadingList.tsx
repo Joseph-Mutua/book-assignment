@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Typography,
   Grid,
@@ -12,22 +12,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import useReadingListStore from "../store/useReadingListStore";
 import BookCard from "./BookCard";
 import { Book } from "../types";
+import { useSnackbar } from "../hooks/useSnackbar";
 
 const ReadingList: React.FC = () => {
   const theme = useTheme();
   const isXsScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const { readingList, removeBook } = useReadingListStore();
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const {
+    snackbarMessage,
+    openSnackbar,
+    snackbarSeverity,
+    showSnackbar,
+    handleCloseSnackbar,
+  } = useSnackbar();
 
   const handleRemoveFromReadingList = (book: Book) => {
     removeBook(book);
-    setSnackbarMessage(`${book.title} removed from reading list`);
-    setOpenSnackbar(true);
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
+    showSnackbar(`${book.title} removed from reading list`, "success");
   };
 
   return (
@@ -65,9 +66,7 @@ const ReadingList: React.FC = () => {
           container
           spacing={2}
           justifyContent={isXsScreen ? "center" : "flex-start"}
-          sx={{
-            display: "flex",
-          }}
+          sx={{ display: "flex" }}
         >
           <AnimatePresence>
             {readingList.map((book, index) => (
@@ -104,7 +103,7 @@ const ReadingList: React.FC = () => {
       >
         <Alert
           onClose={handleCloseSnackbar}
-          severity="success"
+          severity={snackbarSeverity}
           sx={{ width: "100%" }}
         >
           {snackbarMessage}

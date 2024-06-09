@@ -12,6 +12,7 @@ import SearchResultsDropdown from "./SearchResultsDropdown";
 import useReadingListStore from "../store/useReadingListStore";
 import { AnimatePresence } from "framer-motion";
 import { Book } from "../types";
+import { useSnackbar } from "../hooks/useSnackbar";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -21,11 +22,13 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "info">(
-    "success"
-  );
+  const {
+    snackbarMessage,
+    openSnackbar,
+    snackbarSeverity,
+    showSnackbar,
+    handleCloseSnackbar,
+  } = useSnackbar();
   const { readingList, addBook } = useReadingListStore();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,18 +47,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
         (b) => b.title === book.title && b.author === book.author
       )
     ) {
-      setSnackbarMessage(`${book.title} is already in the reading list`);
-      setSnackbarSeverity("info");
+      showSnackbar(`${book.title} is already in the reading list`, "info");
     } else {
       addBook(book);
-      setSnackbarMessage(`${book.title} added to reading list`);
-      setSnackbarSeverity("success");
+      showSnackbar(`${book.title} added to reading list`, "success");
     }
-    setOpenSnackbar(true);
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (

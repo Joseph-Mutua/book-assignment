@@ -185,10 +185,12 @@ frontend/
 │   │   ├── ReadingList.tsx
 │   │   ├── SearchBar.tsx
 │   │   ├── SearchResultsDropdown.tsx
+│   │   ├── LoadingSkeletons.tsx
 │   ├── graphql/
 │   │   ├── queries.ts
 │   ├── hooks/
 │   │   ├── useBooks.ts
+│   │   ├── useSnackbar.ts
 │   ├── store/
 │   │   ├── useReadingListStore.ts
 │   ├── styles/
