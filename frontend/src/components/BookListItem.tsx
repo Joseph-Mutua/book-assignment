@@ -70,7 +70,10 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
             fullWidth={isSmallScreen}
             disabled={isBookInReadingList}
             sx={{
-                color: "white",
+              color: "white",
+              borderRadius: 28, 
+              margin: 1,
+              fontWeight: "bold",
             }}
             aria-label={
               isBookInReadingList

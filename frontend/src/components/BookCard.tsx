@@ -54,8 +54,9 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
             ? theme.palette.secondary.main
             : theme.palette.primary.main,
           color: theme.palette.common.white,
-          borderRadius: "8px",
+          borderRadius: 28,
           margin: 1,
+          fontWeight: "bold", 
         }}
         onClick={onRemove || onAdd}
         startIcon={onRemove ? <DeleteIcon /> : <AddIcon />}
