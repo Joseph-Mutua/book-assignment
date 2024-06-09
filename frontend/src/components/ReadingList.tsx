@@ -3,6 +3,7 @@ import { Typography, Grid, Box, Snackbar, Alert } from "@mui/material";
 import BookCard from "./BookCard";
 import { useTheme } from "@mui/material/styles";
 import useReadingListStore from "../store/useReadingListStore";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ReadingList: React.FC = () => {
   const theme = useTheme();
@@ -39,20 +40,28 @@ const ReadingList: React.FC = () => {
       {readingList.length === 0 ? (
         <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
           <Typography variant="body1">
-            No books in your reading list.
+            No books in the reading list. Search to Add
           </Typography>
         </Box>
       ) : (
         <Grid container spacing={2}>
-          {readingList.map((book, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-              <BookCard
-                book={book}
-                onAdd={() => {}} // No add functionality in reading list
-                onRemove={() => handleRemoveFromReadingList(book)}
-              />
-            </Grid>
-          ))}
+          <AnimatePresence>
+            {readingList.map((book, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <BookCard
+                    book={book}
+                    onRemove={() => handleRemoveFromReadingList(book)}
+                  />
+                </motion.div>
+              </Grid>
+            ))}
+          </AnimatePresence>
         </Grid>
       )}
       <Snackbar

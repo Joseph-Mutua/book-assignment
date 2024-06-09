@@ -10,6 +10,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import StyledTextField from "./styled/StyledTextField";
 import SearchResultsDropdown from "./SearchResultsDropdown";
 import useReadingListStore from "../store/useReadingListStore";
+import { AnimatePresence } from "framer-motion";
 
 interface Book {
   title: string;
@@ -85,14 +86,16 @@ const SearchBar: React.FC<{
             }}
             fullWidth
           />
-          {showDropdown && query && (
-            <Box sx={{ position: "relative", width: "100%" }}>
-              <SearchResultsDropdown
-                results={results}
-                onAdd={handleAddToReadingList}
-              />
-            </Box>
-          )}
+          <AnimatePresence>
+            {showDropdown && query && (
+              <Box sx={{ position: "relative", width: "100%" }}>
+                <SearchResultsDropdown
+                  results={results}
+                  onAdd={handleAddToReadingList}
+                />
+              </Box>
+            )}
+          </AnimatePresence>
         </Box>
         <Snackbar
           open={openSnackbar}

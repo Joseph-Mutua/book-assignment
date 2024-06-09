@@ -9,17 +9,22 @@ import {
 
 interface BookCardProps {
   book: { title: string; author: string; coverPhotoURL: string };
-  onAdd: () => void;
-  onRemove?: () => void; // Optional for reading list
+  onAdd?: () => void;
+  onRemove?: () => void;
 }
 
 const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
-  const coverPhoto = new URL(`../${book.coverPhotoURL}`, import.meta.url)
-    .href;
+  const coverPhoto = new URL(`../${book.coverPhotoURL}`, import.meta.url).href;
 
   return (
     <Card
-      sx={{ display: "flex", flexDirection: "column", margin: 2, width: 250 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        margin: 2,
+        width: 250,
+        height: 400,
+      }}
     >
       <CardMedia
         component="img"
