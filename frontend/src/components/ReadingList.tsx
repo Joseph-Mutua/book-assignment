@@ -2,18 +2,11 @@ import React, { useState } from "react";
 import { Typography, Grid, Box, Snackbar, Alert } from "@mui/material";
 import BookCard from "./BookCard";
 import { useTheme } from "@mui/material/styles";
+import useReadingListStore from "../store/useReadingListStore";
 
-interface ReadingListProps {
-  books: { title: string; author: string; coverPhotoURL: string }[];
-  onRemove: (book: {
-    title: string;
-    author: string;
-    coverPhotoURL: string;
-  }) => void;
-}
-
-const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
+const ReadingList: React.FC = () => {
   const theme = useTheme();
+  const { readingList, removeBook } = useReadingListStore();
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -22,7 +15,7 @@ const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
     author: string;
     coverPhotoURL: string;
   }) => {
-    onRemove(book);
+    removeBook(book);
     setSnackbarMessage(`${book.title} removed from reading list`);
     setOpenSnackbar(true);
   };
@@ -43,7 +36,7 @@ const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
       >
         Reading List
       </Typography>
-      {books.length === 0 ? (
+      {readingList.length === 0 ? (
         <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
           <Typography variant="body1">
             No books in your reading list.
@@ -51,7 +44,7 @@ const ReadingList: React.FC<ReadingListProps> = ({ books, onRemove }) => {
         </Box>
       ) : (
         <Grid container spacing={2}>
-          {books.map((book, index) => (
+          {readingList.map((book, index) => (
             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
               <BookCard
                 book={book}

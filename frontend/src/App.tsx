@@ -6,41 +6,19 @@ import SearchBar from "./components/SearchBar";
 import ReadingList from "./components/ReadingList";
 import theme from "./styles/theme";
 import { useBooks } from "./hooks/useBooks";
-import client from "./apollo-client";
-
-interface Book {
-  title: string;
-  author: string;
-  coverPhotoURL: string;
-}
+import client from "./utils/apolloClient";
 
 const App: React.FC = () => {
   const { loading, error, data } = useBooks();
   const [searchQuery, setSearchQuery] = useState("");
-  const [readingList, setReadingList] = useState<Book[]>([]);
 
+  interface Book {
+    title: string;
+    author: string;
+    coverPhotoURL: string;
+  }
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-  };
-
-  const handleAddToReadingList = (book: Book) => {
-    setReadingList((prevList) => {
-      // Ensure unique items in the reading list
-      if (
-        !prevList.find(
-          (b) => b.title === book.title && b.author === book.author
-        )
-      ) {
-        return [...prevList, book];
-      }
-      return prevList;
-    });
-  };
-
-  const handleRemoveFromReadingList = (book: Book) => {
-    setReadingList((prevList) =>
-      prevList.filter((b) => b.title !== book.title || b.author !== book.author)
-    );
   };
 
   const filteredBooks =
@@ -56,20 +34,12 @@ const App: React.FC = () => {
           <Box sx={{ marginTop: 4, textAlign: "center" }}>
             <Typography
               variant="h4"
-              sx={{ color: "#335c6e", margin: "20px 0" }}
+              sx={{ color: theme.palette.text.primary, margin: "20px 0" }}
             >
               Book Assignment
             </Typography>
-            <SearchBar
-              onSearch={handleSearch}
-              results={filteredBooks}
-              onAdd={handleAddToReadingList}
-              readingList={readingList}
-            />
-            <ReadingList
-              books={readingList}
-              onRemove={handleRemoveFromReadingList}
-            />
+            <SearchBar onSearch={handleSearch} results={filteredBooks} />
+            <ReadingList />
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
           </Box>

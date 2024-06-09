@@ -9,6 +9,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import StyledTextField from "./styled/StyledTextField";
 import SearchResultsDropdown from "./SearchResultsDropdown";
+import useReadingListStore from "../store/useReadingListStore";
 
 interface Book {
   title: string;
@@ -19,9 +20,7 @@ interface Book {
 const SearchBar: React.FC<{
   onSearch: (query: string) => void;
   results: Book[];
-  onAdd: (book: Book) => void;
-  readingList: Book[];
-}> = ({ onSearch, results, onAdd, readingList }) => {
+}> = ({ onSearch, results }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -29,6 +28,7 @@ const SearchBar: React.FC<{
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "info">(
     "success"
   );
+  const { readingList, addBook } = useReadingListStore();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -49,7 +49,7 @@ const SearchBar: React.FC<{
       setSnackbarMessage(`${book.title} is already in the reading list`);
       setSnackbarSeverity("info");
     } else {
-      onAdd(book);
+      addBook(book);
       setSnackbarMessage(`${book.title} added to reading list`);
       setSnackbarSeverity("success");
     }
