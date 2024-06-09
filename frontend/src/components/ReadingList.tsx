@@ -26,7 +26,7 @@ const ReadingList: React.FC = () => {
   };
 
   return (
-    <div>
+    <div aria-label="Reading List">
       <Typography
         variant="h6"
         sx={{

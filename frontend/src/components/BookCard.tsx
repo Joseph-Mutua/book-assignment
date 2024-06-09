@@ -25,6 +25,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
         width: 250,
         height: 400,
       }}
+      aria-label={`Card for book titled ${book.title}`}
     >
       <CardMedia
         component="img"
@@ -49,6 +50,11 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
           margin: 1,
         }}
         onClick={onRemove || onAdd}
+        aria-label={
+          onRemove
+            ? `Remove ${book.title} from reading list`
+            : `Add ${book.title} to reading list`
+        }
       >
         {onRemove ? "Remove" : "Add to Reading List"}
       </Button>

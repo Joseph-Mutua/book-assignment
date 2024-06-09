@@ -80,11 +80,12 @@ const SearchBar: React.FC<{
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <SearchIcon />
+                  <SearchIcon aria-label="search icon" />
                 </InputAdornment>
               ),
             }}
             fullWidth
+            aria-label="Search for books"
           />
           <AnimatePresence>
             {showDropdown && query && (

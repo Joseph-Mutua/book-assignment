@@ -25,9 +25,6 @@ interface SearchResultsDropdownProps {
   }) => void;
 }
 
-
-
-
 const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
   results,
   onAdd,
@@ -53,7 +50,7 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
     >
       <StyledBox>
         {results.length === 0 ? (
-          <ListItem>
+          <ListItem aria-label="No titles match your search">
             <ListItemText primary="No titles match your search" />
           </ListItem>
         ) : (
@@ -70,6 +67,7 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
                       alt={`${book.title} cover`}
                       variant="square"
                       sx={{ borderRadius: 2 }} // Add this line for rounded borders
+                      aria-label={`Cover of ${book.title}`}
                     />
                   </ListItemAvatar>
                   <ListItemText
@@ -100,6 +98,14 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
                         (b) =>
                           b.title === book.title && b.author === book.author
                       )}
+                      aria-label={
+                        readingList.some(
+                          (b) =>
+                            b.title === book.title && b.author === book.author
+                        )
+                          ? `Already added ${book.title} to reading list`
+                          : `Add ${book.title} to reading list`
+                      }
                     >
                       {readingList.some(
                         (b) =>
