@@ -1,4 +1,4 @@
-# Book Assignment App Documentation
+# Book Assignment App FrontEnd Documentation
 
 ## Overview
 
@@ -11,7 +11,7 @@ The Book Assignment App allows teachers to search for books by title, add them t
 - **Add Books to Reading List**: Each book in the search results can be added to the reading list.
 - **View Reading List**: The reading list displays all books added by the teacher.
 - **Remove Books from Reading List**: Each book in the reading list can be removed.
-- **Responsive Design**: The app is fully responsive across all screen sizes.
+- **Responsive Design**: The app is fully responsive across all screen sizes and utilizes subtle animations to engage the user.
 - **State Persistence**: The reading list is persisted across sessions using local storage.
 - **User Feedback**: Success messages are shown when books are added or removed from the reading list.
 
@@ -21,23 +21,33 @@ The Book Assignment App allows teachers to search for books by title, add them t
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-repo/book-assignment-app.git
-   cd book-assignment-app
+   git clone https://github.com/Joseph-Mutua/ello-book-assignment.git
+   cd ello-book-assignment
    ```
 
 2. **Install dependencies**:
    ```bash
+   cd frontend
+   npm install
+   cd backend
    npm install
    ```
 
 3. **Start the development server**:
+ ***Frontend***
+   ```bash
+   npm run dev
+   ```
+
+   ***Backend***
    ```bash
    npm start
    ```
 
+
 ### Running the App
 
-Once the development server is running, open your browser and navigate to `http://localhost:3000`. You will see the Book Assignment App.
+Once the development server is running, open your browser and navigate to `http://localhost:5173/`. You will see the Book Assignment App.
 
 ## Components
 
@@ -133,6 +143,8 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 ## Example Workflow
 
 1. **Search for a Book**:
+   ![Book Search](./frontend/public/BookSearch.png)
+
    - Type the title of a book in the search bar.
    - The dropdown will display the search results.
 
@@ -143,19 +155,12 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 3. **View the Reading List**:
    - Scroll down to view the reading list.
    - The list displays all books that have been added.
+    ![Reading List](./frontend/public/ReadingList.png)
 
 4. **Remove a Book from the Reading List**:
    - Click the "Remove" button next to a book in the reading list.
    - A success message will appear, and the book will be removed from the reading list.
 
-## Contributing
-
-If you want to contribute to the development of this app, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes and push them to your fork.
-4. Create a pull request with a detailed description of your changes.
 
 ## License
 
@@ -163,8 +168,4 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 
 ## Contact
 
-For any questions or feedback, please contact [your email].
-
----
-
-This documentation covers all the essential aspects of the Book Assignment App, including installation, usage, component structure, state management, and styling. It aims to provide a comprehensive guide for users and developers alike.
+For any questions or feedback, please contact ***Mutuaj793@gmail.com***
