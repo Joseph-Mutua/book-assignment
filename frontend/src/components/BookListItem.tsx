@@ -48,12 +48,16 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
           primary={book.title}
           primaryTypographyProps={{
             fontWeight: "bold",
-            color: theme.palette.text.primary,
+            color: isBookInReadingList
+              ? theme.palette.text.disabled
+              : theme.palette.text.primary,
           }}
           secondary={book.author}
           secondaryTypographyProps={{
             fontStyle: "italic",
-            color: theme.palette.text.secondary,
+            color: isBookInReadingList
+              ? theme.palette.text.disabled
+              : theme.palette.text.secondary,
           }}
         />
         <Box
@@ -71,7 +75,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
             disabled={isBookInReadingList}
             sx={{
               color: "white",
-              borderRadius: 28, 
+              borderRadius: 28,
               margin: 1,
               fontWeight: "bold",
             }}
