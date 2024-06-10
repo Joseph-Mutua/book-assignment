@@ -9,6 +9,8 @@ import {
   useMediaQuery,
   useTheme,
   Divider,
+  Grid,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Book } from "../types";
@@ -35,60 +37,91 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
   return (
     <>
       <ListItem>
-        <ListItemAvatar>
-          <Avatar
-            src={new URL(`../../${book.coverPhotoURL}`, import.meta.url).href}
-            alt={`${book.title} cover`}
-            variant="square"
-            sx={{ borderRadius: 2 }}
-            aria-label={`Cover of ${book.title}`}
-          />
-        </ListItemAvatar>
-        <ListItemText
-          primary={book.title}
-          primaryTypographyProps={{
-            fontWeight: "bold",
-            color: isBookInReadingList
-              ? theme.palette.text.disabled
-              : theme.palette.text.primary,
-          }}
-          secondary={book.author}
-          secondaryTypographyProps={{
-            fontStyle: "italic",
-            color: isBookInReadingList
-              ? theme.palette.text.disabled
-              : theme.palette.text.secondary,
-          }}
-        />
-        <Box
-          sx={{
-            marginLeft: isSmallScreen ? 0 : "auto",
-            marginTop: isSmallScreen ? 2 : 0,
-            width: isSmallScreen ? "100%" : "auto",
-          }}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleAddToReadingList}
-            fullWidth={isSmallScreen}
-            disabled={isBookInReadingList}
-            sx={{
-              color: "white",
-              borderRadius: 28,
-              margin: 1,
-              fontWeight: "bold",
-            }}
-            aria-label={
-              isBookInReadingList
-                ? `Already added ${book.title} to reading list`
-                : `Add ${book.title} to reading list`
-            }
-            startIcon={!isBookInReadingList && <AddIcon />}
-          >
-            {isBookInReadingList ? "Added" : "Add to Reading List"}
-          </Button>
-        </Box>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={12} sm={2}>
+            <ListItemAvatar>
+              <Avatar
+                src={
+                  new URL(`../../${book.coverPhotoURL}`, import.meta.url).href
+                }
+                alt={`${book.title} cover`}
+                variant="square"
+                sx={{ borderRadius: 2 }}
+                aria-label={`Cover of ${book.title}`}
+              />
+            </ListItemAvatar>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItemText
+              primary={
+                <Typography
+                  variant="body1"
+                  noWrap
+                  sx={{
+                    fontWeight: "bold",
+                    color: isBookInReadingList
+                      ? theme.palette.text.disabled
+                      : theme.palette.text.primary,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {book.title}
+                </Typography>
+              }
+              secondary={
+                <Typography
+                  variant="body2"
+                  noWrap
+                  sx={{
+                    fontStyle: "italic",
+                    color: isBookInReadingList
+                      ? theme.palette.text.disabled
+                      : theme.palette.text.secondary,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {book.author}
+                </Typography>
+              }
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                marginLeft: isSmallScreen ? 0 : "auto",
+                marginTop: isSmallScreen ? 2 : 0,
+                width: isSmallScreen ? "100%" : "auto",
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleAddToReadingList}
+                fullWidth={isSmallScreen}
+                disabled={isBookInReadingList}
+                sx={{
+                  color: "white",
+                  borderRadius: 28,
+                  margin: 1,
+                  fontWeight: "bold",
+                  whiteSpace: "nowrap",
+                }}
+                aria-label={
+                  isBookInReadingList
+                    ? `Already added ${book.title} to reading list`
+                    : `Add ${book.title} to reading list`
+                }
+                startIcon={!isBookInReadingList && <AddIcon />}
+              >
+                {isBookInReadingList ? "Added" : "Add to Reading List"}
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </ListItem>
       <Divider />
     </>
