@@ -37,7 +37,12 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
   return (
     <>
       <ListItem>
-        <Grid container spacing={2} alignItems="center">
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          direction={isSmallScreen ? "column" : "row"}
+        >
           <Grid item>
             <ListItemAvatar>
               <Avatar
@@ -51,18 +56,18 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
               />
             </ListItemAvatar>
           </Grid>
-          <Grid item xs={12} sm={6} md={8}>
+          <Grid item xs zeroMinWidth>
             <ListItemText
               primary={
                 <Typography
                   variant="body1"
-                  noWrap
+                  noWrap={!isSmallScreen}
                   sx={{
                     fontWeight: "bold",
                     color: isBookInReadingList
                       ? theme.palette.text.disabled
                       : theme.palette.text.primary,
-                    whiteSpace: "nowrap",
+                    whiteSpace: isSmallScreen ? "normal" : "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                   }}
@@ -73,13 +78,13 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
               secondary={
                 <Typography
                   variant="body2"
-                  noWrap
+                  noWrap={!isSmallScreen}
                   sx={{
                     fontStyle: "italic",
                     color: isBookInReadingList
                       ? theme.palette.text.disabled
                       : theme.palette.text.secondary,
-                    whiteSpace: "nowrap",
+                    whiteSpace: isSmallScreen ? "normal" : "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                   }}
@@ -89,7 +94,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={4} md={2}>
+          <Grid item>
             <Box
               sx={{
                 marginLeft: isSmallScreen ? 0 : "auto",
