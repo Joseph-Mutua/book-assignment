@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  InputAdornment,
-  Box,
-  ClickAwayListener,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { InputAdornment, Box, ClickAwayListener } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import StyledTextField from "./styled/StyledTextField";
 import SearchResultsDropdown from "./SearchResultsDropdown";
@@ -22,13 +16,7 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const {
-    snackbarMessage,
-    openSnackbar,
-    snackbarSeverity,
-    showSnackbar,
-    handleCloseSnackbar,
-  } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
   const { readingList, addBook } = useReadingListStore();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
       showSnackbar(`${book.title} is already in the reading list`, "info");
     } else {
       addBook(book);
-      showSnackbar(`${book.title} added to reading list`, "success");
+      showSnackbar(`${book.title} added to the reading list`, "success");
     }
   };
 
@@ -91,20 +79,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
             )}
           </AnimatePresence>
         </Box>
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={5000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        >
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity={snackbarSeverity}
-            sx={{ width: "100%" }}
-          >
-            {snackbarMessage}
-          </Alert>
-        </Snackbar>
       </Box>
     </ClickAwayListener>
   );

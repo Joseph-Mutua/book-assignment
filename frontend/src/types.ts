@@ -18,3 +18,10 @@ export type MyPersist = (
   config: StateCreator<AppState>,
   options: PersistOptions<AppState>
 ) => StateCreator<AppState>;
+
+
+export interface SnackbarMessage {
+  message: string;
+  key: number;
+  severity: "success" | "info";
+}

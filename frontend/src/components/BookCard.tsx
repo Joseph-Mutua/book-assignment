@@ -35,7 +35,12 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
     >
       <CardMedia
         component="img"
-        sx={{ height: 200, objectFit: "cover" }}
+        sx={{
+          height: 200,
+          objectFit: "cover",
+          borderTopLeftRadius: 8, // Add borderTopLeftRadius for top left corner of image
+          borderTopRightRadius: 8, // Add borderTopRightRadius for top right corner of image
+        }}
         image={coverPhoto}
         alt={`${book.title} cover`}
       />
@@ -56,7 +61,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
           color: theme.palette.common.white,
           borderRadius: 28,
           margin: 1,
-          fontWeight: "bold", 
+          fontWeight: "bold",
         }}
         onClick={onRemove || onAdd}
         startIcon={onRemove ? <DeleteIcon /> : <AddIcon />}

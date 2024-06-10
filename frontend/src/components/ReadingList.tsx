@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Typography,
-  Grid,
-  Box,
-  Snackbar,
-  Alert,
-  useMediaQuery,
-} from "@mui/material";
+import { Typography, Grid, Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { AnimatePresence, motion } from "framer-motion";
 import useReadingListStore from "../store/useReadingListStore";
@@ -18,13 +11,7 @@ const ReadingList: React.FC = () => {
   const theme = useTheme();
   const isXsScreen = useMediaQuery(theme.breakpoints.down("xs"));
   const { readingList, removeBook } = useReadingListStore();
-  const {
-    snackbarMessage,
-    openSnackbar,
-    snackbarSeverity,
-    showSnackbar,
-    handleCloseSnackbar,
-  } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
 
   const handleRemoveFromReadingList = (book: Book) => {
     removeBook(book);
@@ -95,20 +82,6 @@ const ReadingList: React.FC = () => {
           </AnimatePresence>
         </Grid>
       )}
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={5000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={snackbarSeverity}
-          sx={{ width: "100%" }}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
     </Box>
   );
 };

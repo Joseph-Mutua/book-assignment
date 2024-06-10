@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -20,7 +18,7 @@ const Header: React.FC = () => {
       }}
     >
       <img
-        src={new URL(`../../public/Logo.svg`, import.meta.url).href}
+        src={new URL(`../../public/ReadingIcon.svg`, import.meta.url).href}
         alt="App Icon"
         style={{
           width: isSmallScreen ? 80 : 100,

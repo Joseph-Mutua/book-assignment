@@ -1,27 +1,25 @@
-import { useState } from "react";
+import { useSnackbar as useNotistack } from "notistack";
+import { useTheme } from "@mui/material/styles";
 
 export const useSnackbar = () => {
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "info">(
-    "success"
-  );
+  const { enqueueSnackbar } = useNotistack();
+  const theme = useTheme();
 
   const showSnackbar = (message: string, severity: "success" | "info") => {
-    setSnackbarMessage(message);
-    setSnackbarSeverity(severity);
-    setOpenSnackbar(true);
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
+    enqueueSnackbar(message, {
+      variant: severity,
+      style: {
+        backgroundColor:
+          severity === "success"
+            ? theme.palette.custom?.teal
+            : theme.palette.custom?.orangePastel,
+        color: theme.palette.background.default,
+        fontFamily: theme.typography.fontFamily,
+      },
+    });
   };
 
   return {
-    snackbarMessage,
-    openSnackbar,
-    snackbarSeverity,
     showSnackbar,
-    handleCloseSnackbar,
   };
 };
