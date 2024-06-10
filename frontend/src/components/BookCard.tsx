@@ -46,7 +46,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, onAdd, onRemove }) => {
       flexDirection: "column",
       margin: 2,
       width: 250,
-      height: 400,
+      height: 380,
       position: "relative" as const,
     },
 
