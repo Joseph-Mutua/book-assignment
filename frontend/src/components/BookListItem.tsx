@@ -38,7 +38,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
     <>
       <ListItem>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={2}>
+          <Grid item>
             <ListItemAvatar>
               <Avatar
                 src={
@@ -51,7 +51,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
               />
             </ListItemAvatar>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} md={8}>
             <ListItemText
               primary={
                 <Typography
@@ -89,7 +89,7 @@ const BookListItem: React.FC<BookListItemProps> = ({ book, onAdd }) => {
               }
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} md={2}>
             <Box
               sx={{
                 marginLeft: isSmallScreen ? 0 : "auto",
