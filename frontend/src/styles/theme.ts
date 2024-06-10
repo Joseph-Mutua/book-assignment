@@ -16,21 +16,33 @@ const theme = createTheme({
       secondary: "#28B8B8", // Turquoise Dark 2
     },
     custom: {
-      turquoiseLight: "#cffafa", 
-      teal: "#4aa088", 
-      yellowDark: "#fabd33", 
-      turquoiseDark1: "#53c2c2", 
-      orangePastel: "#FFE6DC", 
+      turquoiseLight: "#cffafa",
+      teal: "#4aa088",
+      yellowDark: "#fabd33",
+      turquoiseDark1: "#53c2c2",
+      orangePastel: "#FFE6DC",
     },
   },
   typography: {
     fontFamily: "Mulish, sans-serif",
     h6: {
       fontWeight: 700,
-      color: "#335c6e", 
+      color: "#335c6e",
     },
     body1: {
-      color: "#28B8B8", 
+      color: "#28B8B8",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          "&:hover": {
+            boxShadow: "none",
+          },
+        },
+      },
     },
   },
 });

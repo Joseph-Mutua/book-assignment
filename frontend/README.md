@@ -153,7 +153,7 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 ## Example Workflow
 
 1. **Search for a Book**:
-   - ![Book Search](./frontend/public/BookSearch.png)
+    ![Book Search](./public/BookSearch.png)
 
    - Type the title of a book in the search bar.
    - The dropdown will display the search results.
@@ -167,12 +167,12 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 
    - Scroll down to view the reading list.
    - The list displays all books that have been added.
-   - ![Reading List](./frontend/public/ReadingList.png)
+    ![Reading List](./public/ReadingList.png)
 
 4. **Remove a Book from the Reading List**:
    - Click the "Remove" button next to a book in the reading list.
    - A success message will appear, and the book will be removed from the reading list.
-   - ![Reading List](./frontend/public/RemoveBook.png)
+    ![Reading List](./public/RemoveBook.png)
 
 ## Project Structure
 

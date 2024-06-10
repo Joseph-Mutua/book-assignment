@@ -35,7 +35,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
     },
-    
+
     dialogTitle: {
       fontWeight: theme.typography.fontWeightBold,
       fontSize: "1.25rem",
@@ -56,11 +56,11 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       padding: theme.spacing(2),
     },
 
-
     cancelButton: {
       margin: theme.spacing(1),
       borderColor: theme.palette.primary.main,
       color: theme.palette.primary.main,
+      borderRadius: 15,
       "&:hover": {
         color: theme.palette.background.default,
         backgroundColor: theme.palette.primary.light,
@@ -69,6 +69,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
 
     removeButton: {
       margin: theme.spacing(1),
+      borderRadius: 15,
       color: theme.palette.background.default,
       backgroundColor: theme.palette.secondary.main,
       "&:hover": {
