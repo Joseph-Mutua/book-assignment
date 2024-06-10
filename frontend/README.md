@@ -22,12 +22,14 @@ To view the deployed live version visit this [Link](https://ello-frontend-challe
 ### Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/Joseph-Mutua/ello-book-assignment.git
    cd ello-book-assignment
    ```
 
 2. **Install dependencies**:
+
    ```bash
    cd frontend
    npm install
@@ -36,13 +38,15 @@ To view the deployed live version visit this [Link](https://ello-frontend-challe
    ```
 
 3. **Start the development server**:
-   
-   ***Frontend***
+
+   **_Frontend_**
+
    ```bash
    npm run dev
    ```
 
-   ***Backend***
+   **_Backend_**
+
    ```bash
    npm start
    ```
@@ -64,6 +68,7 @@ The `App` component is the root component that integrates all other components. 
 The `SearchBar` component provides an input field for searching books by title. It displays a dropdown with search results.
 
 **Props**:
+
 - `onSearch`: Function to handle the search query.
 - `results`: Array of books that match the search query.
 
@@ -74,6 +79,7 @@ The `SearchBar` component provides an input field for searching books by title. 
 The `SearchResultsDropdown` component displays the list of search results in a dropdown. Each book in the list has an option to be added to the reading list.
 
 **Props**:
+
 - `results`: Array of books that match the search query.
 - `onAdd`: Function to add a book to the reading list.
 
@@ -90,6 +96,7 @@ The `ReadingList` component displays the books that have been added to the readi
 The `BookCard` component displays the details of a book, including the title, author, and cover photo. It provides buttons to add or remove the book from the reading list.
 
 **Props**:
+
 - `book`: The book object containing title, author, and cover photo URL.
 - `onAdd`: Function to add the book to the reading list.
 - `onRemove`: Function to remove the book from the reading list.
@@ -131,6 +138,7 @@ The app uses Material-UI for styling and components. Custom styles are defined i
 - **StyledListItem**: Custom styles for the list items in the dropdown.
 
 **Files**:
+
 - `src/styles/StyledBox.ts`
 - `src/styles/StyledListItem.ts`
 
@@ -145,23 +153,26 @@ Snackbar alerts are used to provide feedback to the user when a book is added or
 ## Example Workflow
 
 1. **Search for a Book**:
-   ![Book Search](./frontend/public/BookSearch.png)
+   - ![Book Search](./frontend/public/BookSearch.png)
 
    - Type the title of a book in the search bar.
    - The dropdown will display the search results.
 
 2. **Add a Book to the Reading List**:
-   - Click the "Add to Reading List" button next to a book in the search results.
+
+   - Click the "Add To List" button next to a book in the search results.
    - A success message will appear, and the book will be added to the reading list.
 
 3. **View the Reading List**:
+
    - Scroll down to view the reading list.
    - The list displays all books that have been added.
-    ![Reading List](./frontend/public/ReadingList.png)
+   - ![Reading List](./frontend/public/ReadingList.png)
 
 4. **Remove a Book from the Reading List**:
    - Click the "Remove" button next to a book in the reading list.
    - A success message will appear, and the book will be removed from the reading list.
+   - ![Reading List](./frontend/public/RemoveBook.png)
 
 ## Project Structure
 
@@ -211,7 +222,6 @@ frontend/
 README.md
 
 ```
-
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.

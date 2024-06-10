@@ -5,6 +5,7 @@ export interface Book {
   title: string;
   author: string;
   coverPhotoURL: string;
+  readingLevel: string;
 }
 
 export interface ReadingListState {
@@ -14,11 +15,10 @@ export interface ReadingListState {
 }
 
 export type AppState = ReadingListState;
-export type MyPersist = (
+export type AppPersist = (
   config: StateCreator<AppState>,
   options: PersistOptions<AppState>
 ) => StateCreator<AppState>;
-
 
 export interface SnackbarMessage {
   message: string;

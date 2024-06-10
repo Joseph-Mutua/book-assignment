@@ -31,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
 
   const handleAddToReadingList = (book: Book) => {
     if (
-      readingList.find(
+      readingList.some(
         (b) => b.title === book.title && b.author === book.author
       )
     ) {
@@ -42,18 +42,30 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
     }
   };
 
+  const styles = {
+    container: {
+      display: "flex",
+      justifyContent: "center",
+      position: "relative",
+      marginBottom: 4,
+      width: "100%",
+    },
+
+    textFieldContainer: {
+      width: "70%",
+      position: "relative",
+    },
+    
+    dropdownContainer: {
+      position: "relative",
+      width: "100%",
+    },
+  };
+
   return (
     <ClickAwayListener onClickAway={handleClickAway}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          position: "relative",
-          marginBottom: 4,
-          width: "100%",
-        }}
-      >
-        <Box sx={{ width: "70%", position: "relative" }}>
+      <Box sx={styles.container}>
+        <Box sx={styles.textFieldContainer}>
           <StyledTextField
             placeholder="Search for books by title..."
             value={query}
@@ -70,7 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
           />
           <AnimatePresence>
             {showDropdown && query && (
-              <Box sx={{ position: "relative", width: "100%" }}>
+              <Box sx={styles.dropdownContainer}>
                 <SearchResultsDropdown
                   results={results}
                   onAdd={handleAddToReadingList}

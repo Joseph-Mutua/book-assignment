@@ -18,42 +18,47 @@ const ReadingList: React.FC = () => {
     showSnackbar(`${book.title} removed from reading list`, "success");
   };
 
+  const styles = {
+    container: {
+      display: "flex",
+      flexDirection: "column" as const,
+      alignItems: "center",
+      padding: 2,
+      width: "100%",
+    },
+
+    title: {
+      color: theme.palette.custom?.yellowDark || theme.palette.text.primary,
+      padding: "8px",
+      marginBottom: "16px",
+      width: "100%",
+      textAlign: "center" as const,
+    },
+    
+    emptyMessage: {
+      textAlign: "center" as const,
+      color: theme.palette.text.secondary,
+    },
+  };
+
   return (
-    <Box
-      aria-label="Reading List"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      padding={2}
-      width="100%"
-    >
+    <Box aria-label="Reading List" sx={styles.container}>
       <Box width="100%">
-        <Typography
-          variant="h4"
-          sx={{
-            color: theme.palette.custom?.yellowDark,
-            padding: "8px",
-            marginBottom: "16px",
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
+        <Typography variant="h4" sx={styles.title}>
           Reading List
         </Typography>
       </Box>
-      {readingList.length === 0 && (
-        <Box sx={{ textAlign: "center", color: theme.palette.text.secondary }}>
+      {readingList.length === 0 ? (
+        <Box sx={styles.emptyMessage}>
           <Typography variant="body1">
             No Books in the Reading List. Search to Add
           </Typography>
         </Box>
-      )}
-      {readingList.length > 0 && (
+      ) : (
         <Grid
           container
           spacing={2}
           justifyContent={isXsScreen ? "center" : "flex-start"}
-          sx={{ display: "flex" }}
         >
           <AnimatePresence>
             {readingList.map((book, index) => (

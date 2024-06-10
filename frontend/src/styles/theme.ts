@@ -16,21 +16,21 @@ const theme = createTheme({
       secondary: "#28B8B8", // Turquoise Dark 2
     },
     custom: {
-      turquoiseLight: "#cffafa", // Turquoise Light
-      teal: "#4aa088", // Teal
-      yellowDark: "#fabd33", // Yellow
-      turquoiseDark1: "#53c2c2", // Turquoise Dark 1
-      orangePastel: "#FFE6DC", // Orange Pastel
+      turquoiseLight: "#cffafa", 
+      teal: "#4aa088", 
+      yellowDark: "#fabd33", 
+      turquoiseDark1: "#53c2c2", 
+      orangePastel: "#FFE6DC", 
     },
   },
   typography: {
     fontFamily: "Mulish, sans-serif",
     h6: {
       fontWeight: 700,
-      color: "#335c6e", // Steel Blue
+      color: "#335c6e", 
     },
     body1: {
-      color: "#28B8B8", // Turquoise Dark 2
+      color: "#28B8B8", 
     },
   },
 });

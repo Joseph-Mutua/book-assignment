@@ -40,9 +40,6 @@ const App: React.FC = () => {
               {!loading && !error && <ReadingList />}
             </Box>
           </Container>
-
-
-    
       </ThemeProvider>
     </ApolloProvider>
   );

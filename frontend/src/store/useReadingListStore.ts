@@ -1,9 +1,9 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import { AppState, Book, MyPersist } from "../types";
+import { AppState, Book, AppPersist } from "../types";
 
 const useReadingListStore = create<AppState>(
-  (persist as MyPersist)(
+  (persist as AppPersist)(
     (set) => ({
       readingList: [],
       addBook: (book: Book) =>
