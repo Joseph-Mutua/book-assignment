@@ -28,7 +28,6 @@ const App: React.FC = () => {
     <ApolloProvider client={client}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-  
           <Container>
             <Header />
             <Box sx={{ marginTop: 4, textAlign: "center" }}>
