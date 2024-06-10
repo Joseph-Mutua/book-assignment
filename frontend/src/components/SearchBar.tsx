@@ -46,19 +46,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, results }) => {
     container: {
       display: "flex",
       justifyContent: "center",
-      position: "relative",
+      position: "relative" as const,
       marginBottom: 4,
       width: "100%",
     },
-
     textFieldContainer: {
       width: "70%",
-      position: "relative",
+      position: "relative" as const,
     },
-    
     dropdownContainer: {
-      position: "relative",
+      position: "absolute" as const,
       width: "100%",
+      zIndex: 1300,
     },
   };
 

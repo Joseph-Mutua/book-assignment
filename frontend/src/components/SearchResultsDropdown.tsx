@@ -20,9 +20,14 @@ const SearchResultsDropdown: React.FC<SearchResultsDropdownProps> = ({
   const styles = {
     container: {
       maxHeight: isSmallScreen ? "50vh" : "70vh",
-      overflowY: "auto",
+      overflowY: "auto" as const,
       width: "100%",
       padding: isSmallScreen ? 1 : 2,
+      position: "absolute" as const,
+      zIndex: 1300,
+      backgroundColor: theme.palette.background.default,
+      boxShadow: theme.shadows[5],
+      borderRadius: theme.shape.borderRadius,
     },
   };
 
