@@ -1,4 +1,4 @@
-# Book Assignment App FrontEnd Documentation
+# Book Assignment App Frontend Documentation
 
 ## Overview
 
