@@ -1,4 +1,3 @@
-// src/components/SortComponent.tsx
 import React from "react";
 import {
   MenuItem,
