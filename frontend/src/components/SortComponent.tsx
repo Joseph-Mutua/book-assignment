@@ -20,13 +20,13 @@ const getStyles = (theme: Theme) => ({
     marginBottom: 2,
   },
   select: {
-    borderRadius: "20px",
+    borderRadius: "16px",
     "& .MuiSelect-select": {
       color: theme.palette.text.primary,
     },
     "& .MuiOutlinedInput-notchedOutline": {
       borderColor: theme.palette.custom?.turquoiseDark1,
-      borderRadius: "20px",
+      borderRadius: "16px",
     },
     "& .MuiSelect-icon": {
       color: "primary.main",
